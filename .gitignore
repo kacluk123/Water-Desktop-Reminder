@@ -1,0 +1,6 @@
+.idea
+.env
+node_modules
+data/config.json
+web/data/config.json
+web/app*
