@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { IUserCrud } from '@/shared/dataStore/user'
 import { IDaysCrud } from '@/shared/dataStore/days'
+import { INotificationCrud } from '@/shared/dataStore/notifications'
 
 const userBridge: IUserCrud = {
   createUser: async (userData) => {
@@ -26,9 +27,27 @@ const daysBridge: IDaysCrud = {
   },
 }
 
+const notificationBridge: INotificationCrud = {
+  createNotification: async (notificationData) => {
+    return ipcRenderer.invoke('create-notification', notificationData)
+  },
+  getNotification: async () => {
+    return ipcRenderer.invoke('get-notifications')
+  },
+  updateNotification: async (id, notificationData) => {
+    return ipcRenderer.invoke('update-notification', id, notificationData)
+  },
+}
+
 const notifications = {
-  notify: (cb: () => void) => {
-    ipcRenderer.invoke('show-notification', cb)
+  notify: () => {
+    ipcRenderer.send('show-notification')
+  },
+  notifyResponse: (cb: () => void) => {
+    return ipcRenderer.invoke('notification-reply', (event, result) => {
+      console.log(result)
+      console.log(result)
+    })
   }
 }
 
@@ -45,4 +64,9 @@ contextBridge.exposeInMainWorld(
 contextBridge.exposeInMainWorld(
   'notifications',
   notifications
+)
+
+contextBridge.exposeInMainWorld(
+  'notificationsData',
+  notificationBridge
 )

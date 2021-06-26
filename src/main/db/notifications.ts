@@ -12,6 +12,9 @@ const notificationSchema = {
     amount: {
       type: 'number'
     },
+    active: {
+      type: 'boolean'
+    }
   }
 }
 
@@ -38,7 +41,7 @@ class NotificationsStore {
     return this.schemaValidator(data);
   }
 
-  async create(data: any): Promise<any> | undefined {
+  async create(data: any) {
     const isValid = this.validate(data);
     if (isValid) {
       const response = await this.db.insert(data)
@@ -46,7 +49,12 @@ class NotificationsStore {
     }
   }
 
-  async edit(data: any, id: string): Promise<any> | undefined {
+  async getNotification() {
+    const notifications = await this.db.find({}).limit(99999)
+    return notifications[0]
+  }
+
+  async edit(data: any, id: string) {
     const isValid = this.validate(data);
     if (isValid) {
       const response = await this.db.update(
@@ -56,11 +64,6 @@ class NotificationsStore {
 
       return response
     }
-  }
-
-  async getDays() {
-    const days = await this.db.find({}).limit(99999)
-    return days
   }
 }
 

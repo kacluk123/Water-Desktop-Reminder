@@ -11,10 +11,12 @@ import { GlobalStyle } from './global.styles'
 import { useUserStore } from '@/renderer/Store/user'
 import { DateTime } from 'luxon'
 import { useDaysStore } from './Store/days'
+import { useNotificationStore } from './Store/notifications'
 
 declare const window: {
   notifications: {
-    notify: (cb: () => void) => void
+    notify: () => void
+    notifyResponse: () => void
   }
 };
 
@@ -23,23 +25,23 @@ const App: React.FC = () => {
   const getUser = useUserStore(state => state.fetch)
   const getDays = useDaysStore(state => state.fetch)
   const userData = useUserStore(state => state.user)
+  const getNotification = useNotificationStore(state => state.fetch)
 
   React.useEffect(() => {
     (async () => {
       try {
         await Promise.all([
           getUser(),
-          getDays()
+          getDays(),
+          getNotification()
         ])
       } finally {
         setLoading(false)
       }
     })()
-    // window.notifications.notify()
 
-    self.addEventListener('notificationclick', function(event) {
-      console.log(event)
-    }, false);
+    window.notifications.notify()
+    window.notifications.notifyResponse({ test: 'test'})
   }, [])
   
   if (isLoading) {

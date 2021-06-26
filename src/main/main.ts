@@ -3,6 +3,7 @@ import path from 'path'
 import { user } from './db/user'
 import { days } from './db/days'
 import notifier from 'node-notifier'
+import { notifications } from './db/notifications'
 
 let isQuiting: boolean = false;
 
@@ -91,16 +92,38 @@ ipcMain.handle('update-day', async (event, id, userData) => {
   return result
 })
 
-ipcMain.handle('show-notification', async (event, cb: () => void) => {
+ipcMain.handle('get-notifications', async (event) => {
+  const result = await notifications.getNotification()
+
+  return result
+})
+
+ipcMain.handle('create-notification', async (event, notificationData) => {
+  const result = await notifications.create(notificationData)
+
+  return result
+})
+
+ipcMain.handle('update-notification', async (event, id, notificationData) => {
+  const result = await notifications.edit(notificationData, id)
+  return result
+})
+
+ipcMain.on('show-notification', async (event, cb: () => void) => {
   notifier.notify({
     title: 'My notification',
     message: 'Hello, there!',
     actions: [
-      'test',
-      'test1'
+      'Drink',
+      'Skip'
     ]
-  }, function (error, response, metadata) {
-    console.log(response, metadata);
+  }, function (error, response, metadata) { 
+    if (metadata?.activationType === 'Drink') {
+      console.log('elo')
+      event.sender.send('notification-reply', 'Drink')
+    } else {
+      event.sender.send('notification-reply', 'Skip') 
+    }
   });
 })
 
