@@ -4,6 +4,7 @@ import { user } from './db/user'
 import { days } from './db/days'
 import notifier from 'node-notifier'
 import { notifications } from './db/notifications'
+import { NotificationsType } from '@/shared/dataStore/notifications'
 
 let isQuiting: boolean = false;
 
@@ -114,15 +115,14 @@ ipcMain.on('show-notification', async (event, cb: () => void) => {
     title: 'My notification',
     message: 'Hello, there!',
     actions: [
-      'Drink',
-      'Skip'
+      NotificationsType.DRINK,
+      NotificationsType.SKIP
     ]
   }, function (error, response, metadata) { 
-    if (metadata?.activationType === 'Drink') {
-      console.log('elo')
-      event.sender.send('notification-reply', 'Drink')
+    if (metadata?.activationType === NotificationsType.DRINK) {\
+      event.sender.send('notification-reply', NotificationsType.DRINK)
     } else {
-      event.sender.send('notification-reply', 'Skip') 
+      event.sender.send('notification-reply', NotificationsType.SKIP) 
     }
   });
 })

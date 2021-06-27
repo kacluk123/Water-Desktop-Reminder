@@ -1,7 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { IUserCrud } from '@/shared/dataStore/user'
 import { IDaysCrud } from '@/shared/dataStore/days'
-import { INotificationCrud } from '@/shared/dataStore/notifications'
+import { INotificationCrud, NotificationsType } from '@/shared/dataStore/notifications'
 
 const userBridge: IUserCrud = {
   createUser: async (userData) => {
@@ -44,9 +44,12 @@ const notifications = {
     ipcRenderer.send('show-notification')
   },
   notifyResponse: (cb: () => void) => {
-    return ipcRenderer.invoke('notification-reply', (event, result) => {
-      console.log(result)
-      console.log(result)
+    return ipcRenderer.on('notification-reply', (event, result) => {
+      console.log('dsadasdas')
+      if (result === NotificationsType.DRINK) {
+        console.log('xdddddd')
+        cb()
+      }
     })
   }
 }

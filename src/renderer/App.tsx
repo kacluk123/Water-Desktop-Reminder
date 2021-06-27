@@ -12,13 +12,7 @@ import { useUserStore } from '@/renderer/Store/user'
 import { DateTime } from 'luxon'
 import { useDaysStore } from './Store/days'
 import { useNotificationStore } from './Store/notifications'
-
-declare const window: {
-  notifications: {
-    notify: () => void
-    notifyResponse: () => void
-  }
-};
+import useNotification from './useNotification'
 
 const App: React.FC = () => {
   const [isLoading, setLoading ] = React.useState(true)
@@ -26,6 +20,7 @@ const App: React.FC = () => {
   const getDays = useDaysStore(state => state.fetch)
   const userData = useUserStore(state => state.user)
   const getNotification = useNotificationStore(state => state.fetch)
+  const { startNotificationInterval, handleNotificationResponse } = useNotification()
 
   React.useEffect(() => {
     (async () => {
@@ -35,13 +30,12 @@ const App: React.FC = () => {
           getDays(),
           getNotification()
         ])
+        startNotificationInterval()
+        handleNotificationResponse()
       } finally {
         setLoading(false)
       }
     })()
-
-    window.notifications.notify()
-    window.notifications.notifyResponse({ test: 'test'})
   }, [])
   
   if (isLoading) {

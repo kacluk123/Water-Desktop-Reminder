@@ -22,3 +22,8 @@ export interface INotificationCrud {
   getNotification: () => Promise<NotificationResponse>
   updateNotification: (id: string, payload: NotificationPayload) => Promise<NotificationResponse>
 }
+
+export enum NotificationsType {
+  SKIP = 'Skip',
+  DRINK = 'Drink'
+}
