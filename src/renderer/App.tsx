@@ -20,6 +20,8 @@ const App: React.FC = () => {
   const getDays = useDaysStore(state => state.fetch)
   const userData = useUserStore(state => state.user)
   const getNotification = useNotificationStore(state => state.fetch)
+  const notification = useNotificationStore(state => state.notification)
+
   const { startNotificationInterval, handleNotificationResponse } = useNotification()
 
   React.useEffect(() => {
@@ -30,18 +32,20 @@ const App: React.FC = () => {
           getDays(),
           getNotification()
         ])
-        startNotificationInterval()
-        handleNotificationResponse()
+        // startNotificationInterval(notification?.time)
+        // handleNotificationResponse(notification?.amount)
+      } catch(err) {
+        console.log(err)
       } finally {
         setLoading(false)
       }
     })()
   }, [])
   
-  if (isLoading) {
+  if (isLoading && !notification) {
     return null
   }
-
+  console.log(notification)
   return (
     <>
       <GlobalStyle />

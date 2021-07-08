@@ -44,10 +44,10 @@ const notifications = {
     ipcRenderer.send('show-notification')
   },
   notifyResponse: (cb: () => void) => {
+    console.log('siema')
     return ipcRenderer.on('notification-reply', (event, result) => {
-      console.log('dsadasdas')
+      console.log(event)
       if (result === NotificationsType.DRINK) {
-        console.log('xdddddd')
         cb()
       }
     })

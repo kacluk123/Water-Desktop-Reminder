@@ -12,30 +12,25 @@ declare const window: {
 const useNotification = () => {
   const notificationInfo = useNotificationStore(state => state.notification)
   const { getDrinks, addDrink } = useDrinks()
-
+  
   const sendNotification = () => {
     window.notifications.notify()
   }
 
-  const startNotificationInterval = () => {
+  const startNotificationInterval = (time: number) => {
     sendNotification()
-    if (notificationInfo) {
-      const time = notificationInfo.time * 60 * 60
-      setInterval(() => {
-        sendNotification()
-      }, time)
-    }
+    setInterval(() => {
+      sendNotification()
+    }, time * 60 * 60)
   }
 
-  const handleNotificationResponse = () => {
-    if (notificationInfo) {
-      window.notifications.notifyResponse(() => {
-        addDrink({
-          amount: notificationInfo.amount,
-          name: 'Water'
-        })
+  const handleNotificationResponse = (amount: number) => {
+    window.notifications.notifyResponse(() => {
+      addDrink({
+        amount: amount,
+        name: 'Water'
       })
-    }
+    })
   }
 
   return {

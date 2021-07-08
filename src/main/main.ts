@@ -119,7 +119,8 @@ ipcMain.on('show-notification', async (event, cb: () => void) => {
       NotificationsType.SKIP
     ]
   }, function (error, response, metadata) { 
-    if (metadata?.activationType === NotificationsType.DRINK) {\
+    if (metadata?.activationType === NotificationsType.DRINK) {
+
       event.sender.send('notification-reply', NotificationsType.DRINK)
     } else {
       event.sender.send('notification-reply', NotificationsType.SKIP) 
