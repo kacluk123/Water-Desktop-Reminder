@@ -17,20 +17,24 @@ const useNotification = () => {
     window.notifications.notify()
   }
 
-  const startNotificationInterval = (time: number) => {
-    sendNotification()
-    setInterval(() => {
+  const startNotificationInterval = () => {
+    if (notificationInfo) {
       sendNotification()
-    }, time * 60 * 60)
+      setInterval(() => {
+        sendNotification()
+      }, notificationInfo.time * 60 * 60)
+    }
   }
 
-  const handleNotificationResponse = (amount: number) => {
-    window.notifications.notifyResponse(() => {
-      addDrink({
-        amount: amount,
-        name: 'Water'
+  const handleNotificationResponse = () => {
+    if (notificationInfo) {
+      window.notifications.notifyResponse(() => {
+        addDrink({
+          amount: notificationInfo?.amount,
+          name: 'Water'
+        })
       })
-    })
+    }
   }
 
   return {

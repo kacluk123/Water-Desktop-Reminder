@@ -44,9 +44,8 @@ const notifications = {
     ipcRenderer.send('show-notification')
   },
   notifyResponse: (cb: () => void) => {
-    console.log('siema')
+    console.log(cb)
     return ipcRenderer.on('notification-reply', (event, result) => {
-      console.log(event)
       if (result === NotificationsType.DRINK) {
         cb()
       }

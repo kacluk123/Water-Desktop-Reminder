@@ -13,16 +13,13 @@ import { DateTime } from 'luxon'
 import { useDaysStore } from './Store/days'
 import { useNotificationStore } from './Store/notifications'
 import useNotification from './useNotification'
+import Content from './Content'
 
 const App: React.FC = () => {
   const [isLoading, setLoading ] = React.useState(true)
   const getUser = useUserStore(state => state.fetch)
   const getDays = useDaysStore(state => state.fetch)
-  const userData = useUserStore(state => state.user)
   const getNotification = useNotificationStore(state => state.fetch)
-  const notification = useNotificationStore(state => state.notification)
-
-  const { startNotificationInterval, handleNotificationResponse } = useNotification()
 
   React.useEffect(() => {
     (async () => {
@@ -32,8 +29,6 @@ const App: React.FC = () => {
           getDays(),
           getNotification()
         ])
-        // startNotificationInterval(notification?.time)
-        // handleNotificationResponse(notification?.amount)
       } catch(err) {
         console.log(err)
       } finally {
@@ -42,38 +37,11 @@ const App: React.FC = () => {
     })()
   }, [])
   
-  if (isLoading && !notification) {
+  if (isLoading) {
     return null
   }
-  console.log(notification)
   return (
-    <>
-      <GlobalStyle />
-      <Router>
-        <Styled.App>
-        <Navigation />
-          <Styled.MainContainer>
-            <Switch>
-              <Route path="/main-info"> 
-                {userData ? <MainInfo /> : <Redirect to="/edit-user" />}
-              </Route> 
-              <Route path="/edit-user">
-                <UserDetails />
-              </Route>
-              <Route path="/notifications">
-                <Notifications />
-              </Route>
-              <Route path="/daily">
-                <DailyDrink />
-              </Route>
-              <Route path="/">
-                <Redirect to="/main-info" />
-              </Route> 
-            </Switch>
-          </Styled.MainContainer>
-        </Styled.App>
-      </Router>
-    </>
+    <Content />
   )
 }
 
