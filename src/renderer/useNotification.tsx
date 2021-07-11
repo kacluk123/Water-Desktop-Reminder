@@ -9,7 +9,12 @@ declare const window: {
   }
 };
 
-const useNotification = () => {
+const NotificationContext = React.createContext({ } as {
+  startNotificationInterval: () => void
+  handleNotificationResponse: () => void
+})
+
+const NotificationProvider: React.FC = ({children}) => {
   const notificationInfo = useNotificationStore(state => state.notification)
   const { getDrinks, addDrink } = useDrinks()
   
@@ -37,10 +42,27 @@ const useNotification = () => {
     }
   }
 
-  return {
-    startNotificationInterval,
-    handleNotificationResponse,
-  }
+  return (
+    <NotificationContext.Provider
+      value={{
+        startNotificationInterval,
+        handleNotificationResponse
+      }}
+    >
+      {children}
+    </NotificationContext.Provider>
+  )
 }
 
-export default useNotification
+function useNotification() {
+  const context = React.useContext(NotificationContext)
+  if (context === undefined) {
+    throw new Error('useCount must be used within a CountProvider')
+  }
+  return context
+}
+
+export {
+  NotificationProvider,
+  useNotification
+}

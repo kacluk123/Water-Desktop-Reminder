@@ -12,21 +12,21 @@ import useDrinks from './useDrinks'
 
 const DailyDrink = () => {
   const neededWater = useUserStore(state => state.user?.neededWater)
-  const { getDrinks, addDrink } = useDrinks()
+  const { addDrink, today } = useDrinks()
   const [ isDrinkFormOpened, setDrinkFormOpened ] = React.useState(false)
 
   const allDrinkedWater = React.useMemo(() => {
-    return getDrinks.reduce<number>((prev, curr) => (prev + curr.number), 0)
-  }, [getDrinks.length])
+    return today?.days.reduce<number>((prev, curr) => (prev + curr.number), 0) ?? 0
+  }, [today?.days.length])
 
   const drinkedWaterInPercent = React.useMemo(() => {
     return allDrinkedWater / (neededWater ?? 0) * 100
-  }, [getDrinks.length])
+  }, [today?.days.length])
 
   return (
     <Styled.DailyDrink>
       <Styled.DailyDrinkLeft>
-        <DailyDrinkList drinks={getDrinks}/>
+        {today?.days && <DailyDrinkList drinks={today.days}/>}
       </Styled.DailyDrinkLeft>
       <Styled.DailyDrinkRight>
         <Styled.HumanContainer>

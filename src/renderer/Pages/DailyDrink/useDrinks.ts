@@ -22,6 +22,7 @@ const useDrinks = () => {
     setDrinks(newDrinks)
     
     if (today?.days && today.days.length > 0) {
+      console.log('edit')
       await daysFetchers.edit(today._id, { days: newDrinks })
       replaceDay({
         createdAt: today.createdAt,
@@ -36,7 +37,8 @@ const useDrinks = () => {
 
   return {
     addDrink,
-    getDrinks
+    getDrinks,
+    today: today
   }
 }
 

@@ -7,7 +7,7 @@ export interface IStore {
   notification: NotificationResponse | null
   fetch: () => Promise<void>
   addNotification: (day: NotificationResponse) => void
-  replaceDay: (day: NotificationResponse, id: string) => void
+  replaceNotification: (day: NotificationResponse, id: string) => void
 }
 
 export const useNotificationStore = create<IStore>(set => ({
@@ -30,7 +30,7 @@ export const useNotificationStore = create<IStore>(set => ({
       }
     })
   },
-  replaceDay: (editedNotification: NotificationResponse) => {
+  replaceNotification: (editedNotification: NotificationResponse) => {
     set((state) => {
       return {
         notification: editedNotification

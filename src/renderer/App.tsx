@@ -12,7 +12,7 @@ import { useUserStore } from '@/renderer/Store/user'
 import { DateTime } from 'luxon'
 import { useDaysStore } from './Store/days'
 import { useNotificationStore } from './Store/notifications'
-import useNotification from './useNotification'
+import { NotificationProvider } from './useNotification'
 import Content from './Content'
 
 const App: React.FC = () => {
@@ -41,7 +41,9 @@ const App: React.FC = () => {
     return null
   }
   return (
-    <Content />
+    <NotificationProvider>
+      <Content />
+    </NotificationProvider>
   )
 }
 

@@ -61,7 +61,6 @@ class NotificationsStore {
         { _id: id }, 
         { $set: data },
       )
-
       return response
     }
   }

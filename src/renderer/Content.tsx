@@ -9,7 +9,7 @@ import Notifications from '@/renderer/Pages/Notifications'
 import DailyDrink from '@/renderer/Pages/DailyDrink'
 import Navigation from '@/renderer/Navigation'
 import { useNotificationStore } from './Store/notifications'
-import useNotification from './useNotification'
+import { useNotification } from './useNotification'
 
 const Content = () => {
   const userData = useUserStore(state => state.user)

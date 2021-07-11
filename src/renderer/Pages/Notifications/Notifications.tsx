@@ -5,9 +5,11 @@ import Input from '@/renderer/Components/Form/Input'
 import Button from '@/renderer/Components/Form/Button'
 import { INotification } from '@/shared/dataStore/notifications'
 import { useNotificationStore } from '@/renderer/Store/notifications'
+import notificationsFetchers from '@/renderer/RemoteData/notifications'
 
 const Notifications: React.FC = () => {
   const notification = useNotificationStore(state => state.notification)
+  const replaceNotificaion = useNotificationStore(state => state.replaceNotification)
   const [ form, setForm ] = React.useState<{
     active: boolean,
     amount: string,
@@ -22,32 +24,54 @@ const Notifications: React.FC = () => {
     time: "0",
   })
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (notification) {
+      const editedNotification = await notificationsFetchers.edit(notification._id, {
+        ...form,
+        amount: Number(form.amount),
+        time: Number(form.amount),
+      })
+      replaceNotificaion({
+        amount: Number(form.amount),
+        time: Number(form.amount),
+        active: form.active,
+        _id: notification._id
+      }, notification._id)
+    }
+  }
+
   return (
     <Styled.Notification>
-      <Styled.NotificationForm>
+      <Styled.NotificationForm onSubmit={handleSubmit}>
       <Input label='Amount' 
         onChange={(e) => { 
-          setForm((form) => ({
-            ...form,
-            amount: e.currentTarget.value
-          }))
+          const value = e.currentTarget.value
+          setForm((form) => {
+            return {
+              ...form,
+              amount: value
+            }
+          })
         }} 
         value={form.amount}
       />
       <Input label='Time' 
         onChange={(e) => { 
+          const value = e.currentTarget.value
           setForm((form) => ({
             ...form,
-            time: e.currentTarget.value
+            time: value
           }))
         }} 
         value={form.time}
       />
       <Toggle 
         onChange={(e) => {
+          const value = e.target.checked
           setForm((form) => ({
             ...form,
-            active: e.target.checked
+            active: value
           }))
         }}
         checked={form.active}
