@@ -14,11 +14,10 @@ import { useNotification } from './useNotification'
 const Content = () => {
   const userData = useUserStore(state => state.user)
   const notification = useNotificationStore(state => state.notification)
-  const { startNotificationInterval, handleNotificationResponse } = useNotification()
+  const { initializeNotifications } = useNotification()
 
   React.useEffect(() => {
-    startNotificationInterval()
-    handleNotificationResponse()
+    initializeNotifications()
   }, [])
 
   return (

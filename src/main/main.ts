@@ -16,11 +16,12 @@ let tray: Tray
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 800,
+    width: 1200,
     height: 600,
     webPreferences: {
-      preload: path.resolve(__dirname, '../../web/preload.js')
-    }
+      preload: path.resolve(__dirname, '../../web/preload.js'),
+      backgroundThrottling: false
+    },
   })
   
   win.loadFile(path.resolve(__dirname, '../../web/index.html'))

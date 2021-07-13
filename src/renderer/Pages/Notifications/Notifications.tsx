@@ -1,4 +1,6 @@
 import * as React from 'react'
+import cogoToast from 'cogo-toast';
+
 import * as Styled from './Notification.styles'
 import Toggle from '@/renderer/Components/Form/Toggle'
 import Input from '@/renderer/Components/Form/Input'
@@ -6,10 +8,12 @@ import Button from '@/renderer/Components/Form/Button'
 import { INotification } from '@/shared/dataStore/notifications'
 import { useNotificationStore } from '@/renderer/Store/notifications'
 import notificationsFetchers from '@/renderer/RemoteData/notifications'
+import { useNotification } from '@/renderer/useNotification'
 
 const Notifications: React.FC = () => {
   const notification = useNotificationStore(state => state.notification)
   const replaceNotificaion = useNotificationStore(state => state.replaceNotification)
+  const { initializeNotifications, clearNotificationInterval } = useNotification()
   const [ form, setForm ] = React.useState<{
     active: boolean,
     amount: string,
@@ -27,7 +31,7 @@ const Notifications: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (notification) {
-      const editedNotification = await notificationsFetchers.edit(notification._id, {
+      await notificationsFetchers.edit(notification._id, {
         ...form,
         amount: Number(form.amount),
         time: Number(form.amount),
@@ -38,6 +42,12 @@ const Notifications: React.FC = () => {
         active: form.active,
         _id: notification._id
       }, notification._id)
+      if (form.active) {
+        initializeNotifications()
+      } else {
+        clearNotificationInterval()
+      }
+      await cogoToast.success('Notification data saved!')
     }
   }
 

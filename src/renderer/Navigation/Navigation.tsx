@@ -6,15 +6,15 @@ import * as Styled from './Navigation.styles'
 
 const routes = [
   {
-    to: '/main-info',
-    label: 'User details',
+    to: '/daily',
+    label: 'Daily',
     icon: (
       <FontAwesomeIcon icon={faUser} />
     )
   },
   {
-    to: '/test',
-    label: 'Test',
+    to: '/main-info',
+    label: 'User details',
     icon: (
       <FontAwesomeIcon icon={faUser} />
     )
@@ -24,13 +24,6 @@ const routes = [
     label: 'Notifications',
     icon: (
       <FontAwesomeIcon icon={faBell} />
-    )
-  },
-  {
-    to: '/daily',
-    label: 'Daily',
-    icon: (
-      <FontAwesomeIcon icon={faUser} />
     )
   },
 ]
