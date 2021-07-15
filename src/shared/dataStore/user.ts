@@ -1,5 +1,5 @@
 export interface UserResponse {
-  id: string
+  _id: string
   weight: number
   name: string
   createdAt: Date

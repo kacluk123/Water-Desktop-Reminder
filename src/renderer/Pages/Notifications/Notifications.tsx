@@ -54,7 +54,7 @@ const Notifications: React.FC = () => {
   return (
     <Styled.Notification>
       <Styled.NotificationForm onSubmit={handleSubmit}>
-      <Input label='Amount' 
+      <Input label='Amount of water per notification' 
         onChange={(e) => { 
           const value = e.currentTarget.value
           setForm((form) => {
@@ -66,7 +66,7 @@ const Notifications: React.FC = () => {
         }} 
         value={form.amount}
       />
-      <Input label='Time' 
+      <Input label='Time in minutes' 
         onChange={(e) => { 
           const value = e.currentTarget.value
           setForm((form) => ({

@@ -72,6 +72,7 @@ ipcMain.handle('get-user', async (event) => {
 })
 
 ipcMain.handle('edit-user', async (event, id, userData) => {
+  console.log(id, userData)
   const result = await user.editUser(id, userData)
 
   return result

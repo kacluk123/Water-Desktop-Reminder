@@ -2,9 +2,16 @@ import styled from 'styled-components'
 
 export const MainInfo = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const MainInfoHolder = styled.div`
   width: 100%;
   height: 100%;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `
 
@@ -13,7 +20,6 @@ export const MainInfoSingleLabel = styled.div`
   grid-row-gap: 10px;
   text-align: center;
 `
-
 
 export const MainInfoSingleLabelContainer = styled.div`
   display: grid;
@@ -35,6 +41,15 @@ export const MainInfoSingleLabelDescription = styled.div`
   color: var(--blue);
   font-weight: 400;
   font-size: 17px;
+`
+
+export const ButtonContainer = styled.div`
+  margin-top: 25px;
+  & {
+    button {
+      width: 157px;
+    }
+  }
 `
 
 export const HumanImageContainer = styled.div`

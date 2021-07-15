@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Styled from './App.styles'
-import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { useUserStore } from './Store/user'
 import { GlobalStyle } from './global.styles'
 import UserDetails from '@/renderer/Pages/UserDetails'
@@ -17,9 +17,10 @@ const Content = () => {
   const { initializeNotifications } = useNotification()
 
   React.useEffect(() => {
-    initializeNotifications()
+    if (notification?.active) {
+      initializeNotifications()
+    }
   }, [])
-
   return (
     <>
       <GlobalStyle />
@@ -28,12 +29,12 @@ const Content = () => {
         <Navigation />
           <Styled.MainContainer>
             <Switch>
-              <Route path="/main-info"> 
-                {userData ? <MainInfo /> : <Redirect to="/edit-user" />}
-              </Route> 
               <Route path="/edit-user">
                 <UserDetails />
               </Route>
+              <Route path="/main-info"> 
+                {userData ? <MainInfo /> : <Redirect to='/edit-user' />}
+              </Route> 
               <Route path="/notifications">
                 <Notifications />
               </Route>
@@ -41,7 +42,7 @@ const Content = () => {
                 <DailyDrink />
               </Route>
               <Route path="/">
-                <Redirect to="/main-info" />
+                {userData ? <Redirect to='/daily'/> :<Redirect to='/edit-user'/>}
               </Route> 
             </Switch>
           </Styled.MainContainer>

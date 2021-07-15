@@ -2,6 +2,8 @@ import { useUserStore } from '@/renderer/Store/user'
 import * as React from 'react'
 import * as Styled from './MainInfo.styles'
 import { Human } from '@/renderer/Components/Icons/human'
+import Button from '@/renderer/Components/Form/Button'
+import { Link } from 'react-router-dom'
 
 const MainInfo: React.FC = () => {
   const user = useUserStore(state => state.user)
@@ -10,36 +12,35 @@ const MainInfo: React.FC = () => {
 
   
   return (
-    <Styled.MainInfo>
-      <button onClick={() => {
-        setPercent(percent => percent + 50)
-      }}>
-        add
-      </button>
-      <Styled.MainInfoSingleLabelContainer>
-        <Styled.MainInfoSingleLabel>
-          <Styled.MainInfoSingleLabelHeader>
-            Name
-          </Styled.MainInfoSingleLabelHeader>
-          <Styled.MainInfoSingleLabelDescription>
-            {user?.name}
-          </Styled.MainInfoSingleLabelDescription>
-        </Styled.MainInfoSingleLabel>
-        <Styled.MainInfoSingleLabel>
-          <Styled.MainInfoSingleLabelHeader>
-            Weight
-          </Styled.MainInfoSingleLabelHeader>
-          <Styled.MainInfoSingleLabelDescription>
-            {user?.weight} kg
-          </Styled.MainInfoSingleLabelDescription>
-        </Styled.MainInfoSingleLabel>
-      </Styled.MainInfoSingleLabelContainer>
-      {/* <Styled.HumanImageContainer>
-      </Styled.HumanImageContainer> */}
-
-        <Human percent={100 - ((percent / 2200) * 100)} />
-
-    </Styled.MainInfo>
+    <Styled.MainInfoHolder>
+      <Styled.MainInfo>
+        <Styled.MainInfoSingleLabelContainer>
+          <Styled.MainInfoSingleLabel>
+            <Styled.MainInfoSingleLabelHeader>
+              Name
+            </Styled.MainInfoSingleLabelHeader>
+            <Styled.MainInfoSingleLabelDescription>
+              {user?.name}
+            </Styled.MainInfoSingleLabelDescription>
+          </Styled.MainInfoSingleLabel>
+          <Styled.MainInfoSingleLabel>
+            <Styled.MainInfoSingleLabelHeader>
+              Weight
+            </Styled.MainInfoSingleLabelHeader>
+            <Styled.MainInfoSingleLabelDescription>
+              {user?.weight} kg
+            </Styled.MainInfoSingleLabelDescription>
+          </Styled.MainInfoSingleLabel>
+        </Styled.MainInfoSingleLabelContainer>
+      </Styled.MainInfo>
+      <Styled.ButtonContainer>
+        <Link to='/edit-user'>
+          <Button>
+            Edit
+          </Button>
+        </Link>
+      </Styled.ButtonContainer>
+    </Styled.MainInfoHolder>
   )
 }
 

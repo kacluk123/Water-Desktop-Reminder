@@ -3,19 +3,38 @@ import * as Styled from './UserDetails.styles'
 
 import Input from '@/renderer/Components/Form/Input'
 import Button from '@/renderer/Components/Form/Button'
-import userFetchers from '@/renderer/RemoteData/user'
+import userFetchers, { User } from '@/renderer/RemoteData/user'
 import { useUserStore } from '@/renderer/Store/user'
+import { useHistory } from 'react-router-dom'
 
 const UserDetails: React.FC = () => {
-  const [weight, setWeight] = React.useState("")
-  const [name, setName] = React.useState("")
+  const userData = useUserStore(state => state.user)
+  const [weight, setWeight] = React.useState(userData?.weight || "")
+  const [name, setName] = React.useState(userData?.name || "")
+  const { push } = useHistory()
   const setUserData = useUserStore(state => state.setUserData)
-  const handleSubmit = async () => {
-    const data = await userFetchers.create({
-      weight: Number(weight),
-      name
-    })
-    setUserData(data)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!userData) {
+      const data = await userFetchers.create({
+        weight: Number(weight),
+        name
+      })
+      setUserData(data)
+      push('/daily')
+    } else {
+      const data = await userFetchers.edit(userData.id, {
+        weight: Number(weight),
+        name
+      })
+      setUserData(new User({
+        weight: Number(weight),
+        name: name,
+        _id: userData.id,
+        createdAt: userData.createdAt
+      }))
+      push('/main-info')
+    }
   }
   
   return (

@@ -49,7 +49,10 @@ class UserStore {
   }
 
   editUser(id: string, data: any) {
-    return this.db.update({ id }, data)
+    return this.db.update(
+      { _id: id }, 
+      { $set: data },
+    )
   }
 }
 

@@ -1,4 +1,4 @@
-import { IUserCrud, UserPayload } from '@/shared/dataStore/user'
+import { IUserCrud, UserPayload, UserResponse } from '@/shared/dataStore/user'
 
 declare const window: {
   user: IUserCrud
@@ -25,10 +25,14 @@ class UserFetchers {
 export class User {
   readonly weight: number
   readonly name: string 
+  readonly id: string
+  readonly createdAt: Date
 
-  constructor(payload: UserPayload) {
+  constructor(payload: UserResponse) {
     this.weight = payload.weight
     this.name = payload.name
+    this.id = payload._id
+    this.createdAt = payload.createdAt
   }
 
   get neededWater() {
