@@ -33,7 +33,7 @@ const NotificationProvider: React.FC = ({children}) => {
   const startNotificationInterval = () => {
     if (notificationInfo) {
       sendNotification()
-      notificationInterval.current = window.setInterval(sendNotification, notificationInfo.time * 60 * 60)
+      notificationInterval.current = window.setInterval(sendNotification,  60 * notificationInfo.time * 1000)
     }
   }
 

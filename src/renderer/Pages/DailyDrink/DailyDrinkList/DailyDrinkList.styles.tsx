@@ -6,9 +6,9 @@ export const DailyDrinkListContainer = styled.div`
   grid-column-gap: 40px;
   padding-bottom: 10px;
   height: 27px;
-  animation: mymove .3s;
+  animation: add-element .3s;
   border-bottom: 1px solid var(--grey-lite);
-  @keyframes mymove {
+  @keyframes add-element {
     from {
       height: 0;
       opacity: 0;

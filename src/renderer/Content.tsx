@@ -29,6 +29,12 @@ const Content = () => {
         <Navigation />
           <Styled.MainContainer>
             <Switch>
+              <Route exact path="/">
+                {userData ? <Redirect to='/daily'/> :<Redirect to='/edit-user'/>}
+              </Route> 
+              <Route path="/daily">
+                <DailyDrink />
+              </Route>
               <Route path="/edit-user">
                 <UserDetails />
               </Route>
@@ -38,12 +44,6 @@ const Content = () => {
               <Route path="/notifications">
                 <Notifications />
               </Route>
-              <Route path="/daily">
-                <DailyDrink />
-              </Route>
-              <Route path="/">
-                {userData ? <Redirect to='/daily'/> :<Redirect to='/edit-user'/>}
-              </Route> 
             </Switch>
           </Styled.MainContainer>
         </Styled.App>

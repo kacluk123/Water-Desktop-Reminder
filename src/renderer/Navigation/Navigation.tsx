@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faBell } from '@fortawesome/free-solid-svg-icons'
 
 import * as Styled from './Navigation.styles'
+import { useRouteMatch } from 'react-router-dom'
 
 const routes = [
   {
@@ -30,6 +31,15 @@ const routes = [
 
 const Navigation: React.FC = () => {
   const [currentRouteIndex, setCurrentRouteIndex] = React.useState<number>(0)
+
+  React.useEffect(() => {
+    const setInitialRoute = () => {
+      const [ routeName ] = window.location.href.split('/').reverse()
+      const currentRouteIndex = routes.findIndex(route => route.to === `/${routeName}`)
+      setCurrentRouteIndex(currentRouteIndex)
+    }
+    setInitialRoute()
+  }, [])  
 
   return (
     <Styled.Navigation currentRouteIndex={currentRouteIndex}>

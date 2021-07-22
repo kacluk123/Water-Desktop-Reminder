@@ -1,1 +1,3 @@
-{"days":[{"name":"Water","number":222,"drinkedAt":{"$$date":1626370280411}}],"_id":"t2eG5zlTIbEN8EZe","createdAt":{"$$date":1626370280412},"updatedAt":{"$$date":1626370280412}}
+{"days":[{"name":"Water","number":200,"drinkedAt":{"$$date":1626973958212}}],"_id":"fzH0lv79E8MXJUBQ","createdAt":{"$$date":1626973958216},"updatedAt":{"$$date":1626973958216}}
+{"days":[{"name":"Water","number":200,"drinkedAt":{"$$date":1626974242192}},{"name":"Water","number":200,"drinkedAt":{"$$date":1626973958212}}],"_id":"fzH0lv79E8MXJUBQ","createdAt":{"$$date":1626973958216},"updatedAt":{"$$date":1626974242199}}
+{"days":[{"name":"Water","number":200,"drinkedAt":{"$$date":1626974360096}},{"name":"Water","number":200,"drinkedAt":{"$$date":1626974242192}},{"name":"Water","number":200,"drinkedAt":{"$$date":1626973958212}}],"_id":"fzH0lv79E8MXJUBQ","createdAt":{"$$date":1626973958216},"updatedAt":{"$$date":1626974360102}}

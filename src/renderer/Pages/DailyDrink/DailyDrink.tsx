@@ -37,7 +37,7 @@ const DailyDrink = () => {
               icon={faCoffee}
               />
               {isDrinkFormOpened ? (
-                <DailyDrinkForm addDrink={addDrink} closeForm={() => { 
+                <DailyDrinkForm addDrink={addDrink} isDrinkFormOpened={isDrinkFormOpened} closeForm={() => { 
                   setDrinkFormOpened(false)}} 
                 />
               ) : null}
