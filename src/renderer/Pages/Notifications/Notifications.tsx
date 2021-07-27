@@ -30,15 +30,16 @@ const Notifications: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(form.amount)
     if (notification) {
       await notificationsFetchers.edit(notification._id, {
         ...form,
         amount: Number(form.amount),
-        time: Number(form.amount),
+        time: Number(form.time),
       })
       replaceNotificaion({
         amount: Number(form.amount),
-        time: Number(form.amount),
+        time: Number(form.time),
         active: form.active,
         _id: notification._id
       }, notification._id)
@@ -55,6 +56,7 @@ const Notifications: React.FC = () => {
     <Styled.Notification>
       <Styled.NotificationForm onSubmit={handleSubmit}>
       <Input label='Amount of water per notification' 
+        type='number'
         onChange={(e) => { 
           const value = e.currentTarget.value
           setForm((form) => {
@@ -74,6 +76,7 @@ const Notifications: React.FC = () => {
             time: value
           }))
         }} 
+        type='number'
         value={form.time}
       />
       <Toggle 

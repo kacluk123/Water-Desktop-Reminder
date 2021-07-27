@@ -41,6 +41,10 @@ function createWindow () {
     }
   ]));
   
+  tray.on('double-click', () => {
+    win.show();
+  })
+
   win.on('close', function (event) {
     if (!isQuiting) {
       event.preventDefault();
@@ -114,8 +118,9 @@ ipcMain.handle('update-notification', async (event, id, notificationData) => {
 
 ipcMain.on('show-notification', async (event, cb: () => void) => {
   notifier.notify({
-    title: 'My notification',
-    message: 'Hello, there!',
+    title: 'Drink',
+    message: "You want to drink water now?",
+    icon: path.resolve(__dirname, '../../web/water.png'),
     actions: [
       NotificationsType.DRINK,
       NotificationsType.SKIP
