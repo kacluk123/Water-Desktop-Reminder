@@ -1,5 +1,6 @@
 Main goal of this project was to learn electron and create simple app that will remind me of drinking water while programming.
-App works in your background and it notifies you when you need to drink. 
+App works in your background and it will send you a desktop notification you when you need to drink. 
+You can also use it by addink drinks manually .
 So You can set your weight, and app will automatically callculate amount of drinks that you need per day.
 
 Technologies:
@@ -14,7 +15,13 @@ Commands to run:
 
 Screenshots:
 ![water](https://user-images.githubusercontent.com/41025347/127534030-3f177b2e-b25e-43fb-a5aa-db1be1c8ae9a.png)
-![notifications](https://user-images.githubusercontent.com/41025347/127534111-df56c63d-820d-42ec-9b27-e50a5a1f87f7.png)
+
+
+![notifications](https://user-images.githubusercontent.com/41025347/127534171-e3fe0d37-0fc4-487a-bd64-a9b474a1facd.png)
+
+
+![manually](https://user-images.githubusercontent.com/41025347/127534408-01ae24b8-aa16-41f1-886d-f7c075d9e034.png)
+
 
 
 
