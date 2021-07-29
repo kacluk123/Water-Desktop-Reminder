@@ -18,10 +18,13 @@ Screenshots:
 ![water](https://user-images.githubusercontent.com/41025347/127534030-3f177b2e-b25e-43fb-a5aa-db1be1c8ae9a.png)
 
 
-![windows](https://user-images.githubusercontent.com/41025347/127535520-9bc5aa08-7051-4a2b-a422-69be101c688b.png)
-
 
 ![notifications](https://user-images.githubusercontent.com/41025347/127534171-e3fe0d37-0fc4-487a-bd64-a9b474a1facd.png)
+
+
+
+![windows](https://user-images.githubusercontent.com/41025347/127535520-9bc5aa08-7051-4a2b-a422-69be101c688b.png)
+
 
 
 ![manually](https://user-images.githubusercontent.com/41025347/127534408-01ae24b8-aa16-41f1-886d-f7c075d9e034.png)
