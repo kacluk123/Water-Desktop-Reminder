@@ -12,6 +12,10 @@ Commands to run:
 2. yarn run dev
 3. yarn run start:electron
 
+Screenshots:
+![water](https://user-images.githubusercontent.com/41025347/127534030-3f177b2e-b25e-43fb-a5aa-db1be1c8ae9a.png)
+![notifications](https://user-images.githubusercontent.com/41025347/127534111-df56c63d-820d-42ec-9b27-e50a5a1f87f7.png)
+
 
 
 
