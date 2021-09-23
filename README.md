@@ -1,7 +1,7 @@
 
 Main goal of this project was to learn electron and create simple app that will remind me of drinking water while programming.
-App works in your background and it will send you a desktop notification you when you need to drink. 
-You can also use it by addink drinks manually .
+App works in your background and it will send you a desktop notification when you need to drink. 
+You can also use it by adding drinks manually .
 So You can set your weight, and app will automatically callculate amount of drinks that you need per day.
 
 Technologies:
